@@ -1,0 +1,15 @@
+{
+    "name": "inventory-connector",
+    "config": {
+        "connector.class" : "io.debezium.connector.mongodb.MongoDbConnector",
+        "tasks.max" : "1",
+        "topic.prefix" : "dbserver1",
+        "mongodb.connection.string" : "mongodb://mongodb:27017/?authSource=admin",
+        "database.include.list" : "events",
+        "schema.history.internal.kafka.bootstrap.servers" : "kafka1:9092,kafka2:9092",
+        "transforms": "route",
+        "transforms.route.type" : "org.apache.kafka.connect.transforms.RegexRouter",
+        "transforms.route.regex" : "([^.]+)\\.([^.]+)\\.([^.]+)",
+        "transforms.route.replacement" : "$3"
+    }
+}
